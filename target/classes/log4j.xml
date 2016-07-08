@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	<!-- [控制台STDOUT] -->
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<param name="encoding" value="UTF-8" />
+		<param name="threshold" value="info" />
+		<param name="target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p: %m%n" />
+		</layout>
+	</appender>
+
+	<!-- [公共Appender] -->
+	<appender name="DEFAULT-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${mhj-weixin}/../logs/mhj-weixin.log" />
+		<param name="Append" value="true" />
+		<param name="encoding" value="UTF-8" />
+		<param name="threshold" value="info" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="[%d{yyyy-MM-dd HH:mm:ss\} %-5p] [%t] (%c:%L) - %m%n" />
+		</layout>
+	</appender>
+
+	<!-- [错误日志APPENDER] -->
+	<appender name="ERROR-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${mhj-weixin}/../logs/mhj-weixin-error.log" />
+		<param name="Append" value="true" />
+		<param name="encoding" value="UTF-8" />
+		<param name="threshold" value="error" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="[%d{yyyy-MM-dd HH:mm:ss\} %-5p] [%t] (%c:%L) - %m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="front.file" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${mhj-weixin}/../logs/mhj-front.log" />
+		<param name="Append" value="true" />
+		<param name="encoding" value="UTF-8" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="[%d{yyyy-MM-dd HH:mm:ss\} %-5p] [%t] - %m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="weixin.file" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${mhj-weixin}/../logs/mhj-weixin.log" />
+		<param name="Append" value="true" />
+		<param name="encoding" value="UTF-8" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="[%d{yyyy-MM-dd HH:mm:ss\} %-5p] [%t] - %m%n" />
+		</layout>
+	</appender>
+	
+	<logger name="front">
+		<level value="info" />
+		<appender-ref ref="front.file" />
+	</logger>
+	<logger name="weixin">
+		<level value="info" />
+		<appender-ref ref="weixin.file" />
+	</logger>
+
+	<!-- Root Logger -->
+	<root>
+		<level value="${rootLevel}"></level>
+		<appender-ref ref="DEFAULT-APPENDER" />
+		<appender-ref ref="ERROR-APPENDER" />
+		<appender-ref ref="console" />
+	</root>
+</log4j:configuration>  
